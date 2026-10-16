@@ -1,0 +1,17 @@
+# Computes a raster (serpentine) path over the loaded mesh.
+
+# [m] distance between two consecutive rows, measured along the short side of the surface
+float64 row_step
+# true: the tool x axis always follows the long side (e1), also on the return rows
+# false: the tool x axis follows the travel direction (e1 on even rows, -e1 on odd rows)
+bool keep_tool_orientation
+---
+bool success
+string message
+# Tool poses in the mesh frame: z = surface normal, x = travel direction projected on the tangent plane
+geometry_msgs/PoseArray poses
+# Indices i (sorted, never 0) where a new continuous segment starts, i.e. between poses[i-1]
+# and poses[i] the tool must leave the surface. Number of segments = len(jump_indices) + 1
+uint32[] jump_indices
+# Number of raster points whose ray did not hit the mesh
+uint32 discarded_points

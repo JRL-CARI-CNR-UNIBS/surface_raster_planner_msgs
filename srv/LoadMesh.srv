@@ -1,0 +1,7 @@
+# Loads a mesh from file. Supported formats: .ply, .obj, .vtk, .stl
+string filename
+# Frame in which the mesh vertices are expressed. If empty, the node parameter 'mesh_frame' is used.
+string frame_id
+---
+bool success
+string message
