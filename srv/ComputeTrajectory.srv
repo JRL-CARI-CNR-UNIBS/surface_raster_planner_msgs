@@ -5,6 +5,13 @@ float64 row_step
 # true: the tool x axis always follows the long side (e1), also on the return rows
 # false: the tool x axis follows the travel direction (e1 on even rows, -e1 on odd rows)
 bool keep_tool_orientation
+# [rad] inclination of the rows: the row direction is e1 rotated by row_angle around e3
+# (counter-clockwise seen from +e3). 0 = rows along the long side, pi/2 = along the short side.
+# The rows cover the bounding box of the surface in the rotated frame.
+float64 row_angle
+# [m] poses closer than edge_margin to the surface boundary (outline and holes, i.e. the mesh
+# edges shared by a single triangle) are dropped; 0 disables. No effect on a closed mesh.
+float64 edge_margin
 ---
 bool success
 string message
@@ -15,3 +22,5 @@ geometry_msgs/PoseArray poses
 uint32[] jump_indices
 # Number of raster points whose ray did not hit the mesh
 uint32 discarded_points
+# Number of hit points dropped because closer than edge_margin to the surface boundary
+uint32 edge_discarded_points
